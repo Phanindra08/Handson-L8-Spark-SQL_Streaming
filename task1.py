@@ -25,7 +25,7 @@ parsed_data = data.select(from_json(col("value").cast("string"), schema) \
 
 # Print parsed data to the CSV files
 query_task1 = parsed_data.writeStream.format("csv").outputMode("append") \
-.option("path", "outputs/task1_outputs") \
+.option("header", "true").option("path", "outputs/task1_outputs") \
 .option("checkpointLocation", "checkpoints/task1_checkpoint").start()
 
 query_task1.awaitTermination()
